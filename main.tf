@@ -1,13 +1,6 @@
-terraform {
-  backend "remote" {
-    # The name of your Terraform Cloud organization.
-    organization = "example-organization"
+resource "aws_s3_bucket" "example" {
 
-    # The name of the Terraform Cloud workspace to store Terraform state files in.
-    workspaces {
-      name = "example-workspace"
-    }
-  }
+  bucket = "jl-terraform-ci-bucket"
 }
 
 # An example resource that does nothing.
