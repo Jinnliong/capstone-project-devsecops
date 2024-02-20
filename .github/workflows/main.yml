@@ -9,10 +9,11 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
+  terraform-validate-plan:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: production
+    needs: [build, dependency-scan, unit-tests] # Ensure previous jobs succeed
+    environment: development
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
