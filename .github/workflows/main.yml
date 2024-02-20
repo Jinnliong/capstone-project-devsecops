@@ -52,12 +52,12 @@ jobs:
     - name: Run Snyk dependency scan (pre-deployment)
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
-      run: |
-      snyk test --paths terraform/* # Scan only Terraform directory
-        if [ $? -ne 0 ]; then
-          echo "Found vulnerabilities in Terraform dependencies! Please fix them before deploying."
-         exit 1
-        fi
+        run: |
+          snyk test --paths terraform/* # Scan only Terraform directory
+          if [ $? -ne 0 ]; then
+            echo "Found vulnerabilities in Terraform dependencies! Please fix them before deploying."
+            exit 1
+          fi
 
     - name: Terraform Plan
       id: plan
