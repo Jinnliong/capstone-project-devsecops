@@ -8,18 +8,18 @@ on:
 permissions:
   contents: read
 
-jobs: # Add a 'jobs' section
-  terraform:
-    name: 'Terraform' # Give your job a name
-    runs-on: ubuntu-latest 
-    evnironment: development
-    #ermissions:  # Define permissions at the job level
+  jobs:
+    terraform:
+      name: 'Terraform'
+      runs-on: ubuntu-latest
+      evnironment: development
+       #permissions:  # Define permissions at the job level
       id-token: write 
       contents: read 
       pull-requests: write
-    env:
-      TF_LOG: INFO
-      AWS_REGION: ${{ secrets.AWS_REGION }}
+      env:
+        TF_LOG: INFO
+        AWS_REGION: ${{ secrets.AWS_REGION }}
 
   terraform-validate-plan:
     runs-on: ubuntu-latest
