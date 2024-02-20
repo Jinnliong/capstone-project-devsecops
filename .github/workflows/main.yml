@@ -3,17 +3,17 @@ name: DevSecOps CI/CD Pipeline
 on:
   pull_request:
     branches: [ "main" ]
-      pull_request:
-        permissions:
-              id-token: write # This is required for aws oidc connection
-              contents: read # This is required for actions/checkout
-              pull-requests: write # This is required for gh bot to comment PR
-        env:
-          TF_LOG: INFO
-          AWS_REGION: ${{ secrets.AWS_REGION }}
 
-jobs:
-  # ... (Other jobs: build, dependency-scan, unit-tests)
+jobs: # Add a 'jobs' section
+  your-job-name: dev # Give your job a name
+    runs-on: ubuntu-latest 
+    #ermissions:  # Define permissions at the job level
+      id-token: write 
+      contents: read 
+      pull-requests: write
+    env:
+      TF_LOG: INFO
+      AWS_REGION: ${{ secrets.AWS_REGION }}
 
   terraform-validate-plan:
     runs-on: ubuntu-latest
