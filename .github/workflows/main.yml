@@ -1,6 +1,6 @@
 name: DevSecOps CI/CD Pipeline
 
-on: 
+on:
   pull_request:
     branches: [ "main" ]
       pull_request:
