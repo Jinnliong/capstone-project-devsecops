@@ -1,0 +1,34 @@
+name: 'DevSecOps CI/CD Pipeline'
+
+on:
+  push:
+    branches: [ "dev-snky" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-validate-plan:  # Your terraform-validate-plan job (include existing steps) 
+    name: 'Terraform-Validate-Plan'
+    runs-on: ubuntu-latest
+    # ...your existing validate & plan steps for the terraform-validate-plan job
+
+  deploy-to-staging:  # Rename for clarity 
+    name: 'Deployment and Staging'
+    runs-on: ubuntu-latest
+    needs: terraform-validate-plan  # Ensure this runs after 'terraform-validate-plan' 
+    environment: staging 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Apply
+        working-directory: ./infrastructure 
+        run: terraform apply tfplan.out  
+        env:
+          TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }} 
+          TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }} 
