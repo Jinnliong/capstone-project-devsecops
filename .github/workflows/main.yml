@@ -9,7 +9,8 @@ permissions:
   contents: read
 
 jobs: # Add a 'jobs' section
-  your-job-name: terraform # Give your job a name
+  terraform:
+    name: 'Terraform' # Give your job a name
     runs-on: ubuntu-latest 
     evnironment: development
     #ermissions:  # Define permissions at the job level
