@@ -1,6 +1,6 @@
-name: DevSecOps CI/CD Pipeline
+name: 'DevSecOps CI/CD Pipeline'
 
-on:  # Main on section 
+on:
   push:
     branches: [ "main" ]
   pull_request:
