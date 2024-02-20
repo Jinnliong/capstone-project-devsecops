@@ -114,7 +114,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
   
       - name: Terraform Apply
-        working-directory: ./infrastructure 
+        working-directory: infrastructure 
         run: terraform apply tfplan.out  
         env:
           TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }} 
