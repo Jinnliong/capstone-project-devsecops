@@ -1,12 +1,12 @@
 name: DevSecOps CI/CD Pipeline
 
-on:
+on:  # Main on section 
   push:
     branches: [ "main" ]
   pull_request:
 
-  jobs:
-    terraform-validate-plan:
+jobs:  # Start of the 'jobs' section
+  terraform-validate-plan: 
     runs-on: ubuntu-latest
     needs: [build, dependency-scan, unit-tests] # Ensure previous jobs succeed
     environment: development
@@ -90,22 +90,22 @@ on:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-    deploy-to-staging:
-      runs-on: ubuntu-latest
-      needs: terraform-validate-plan
-      environment: staging
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
+  deploy-to-staging:
+    runs-on: ubuntu-latest
+    needs: terraform-validate-plan
+    environment: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-        - name: Setup Terraform
-          uses: hashicorp/setup-terraform@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
 
-        - name: Terraform Apply
-          working-directory: ./infrastructure 
-          run: terraform apply tfplan.out   # Use the generated plan 
-          env:
-            TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }} # Credentials for staging env
-            TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
+      - name: Terraform Apply
+        working-directory: ./infrastructure 
+        run: terraform apply tfplan.out   # Use the generated plan 
+        env:
+          TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }} # Credentials for staging env
+          TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
 
-  # ... (deploy-to-production - similar, but using production credentials)
+# ... (deploy-to-production - similar, but using production credentials)
