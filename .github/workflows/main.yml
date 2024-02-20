@@ -8,6 +8,13 @@ on:
 jobs:  # Start of the 'jobs' section
   terraform-validate-plan: 
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-request: write
+    env:
+      TF_Log: INFO
+      AWS_REGION: ${{ secrets.AWS_REGION}}
     needs: [build, dependency-scan, unit-tests] # Ensure previous jobs succeed
     environment: development
     steps:
