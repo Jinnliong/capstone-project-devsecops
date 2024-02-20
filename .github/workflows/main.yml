@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
+  terraform-validate-plan:
     name: 'Terraform-Validate-Plan'
     runs-on: ubuntu-latest
     #needs: [build, dependency-scan, unit-tests] # Ensure previous jobs succeed
