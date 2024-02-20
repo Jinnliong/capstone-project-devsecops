@@ -5,14 +5,18 @@ on:
     branches: [ "dev-snky" ]
   pull_request:
 
-jobs:  # Start of the 'jobs' section
-  terraform-plan: 
+jobs:
+  terraform:
+    name: 'Terraform'
     runs-on: ubuntu-latest
-    env:
-      TF_Log: INFO
-      AWS_REGION: ${{ secrets.AWS_REGION}}
     needs: [build, dependency-scan, unit-tests] # Ensure previous jobs succeed
     environment: development
+    
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
