@@ -12,7 +12,10 @@ jobs:
   terraform-validate-plan:
   name: 'Terraform-Validate-Plan'
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+
+    envs:
+      AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }}
 
     defaults:
       run:
