@@ -15,6 +15,9 @@ jobs:
     name: 'Terraform-Validate-Plan'
     runs-on: ubuntu-latest
     environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }} # Notice indentation!
+
+    env:            
+      AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }}
   
     defaults: 
       run:
@@ -26,10 +29,6 @@ jobs:
     
     - name: Clear Terraform Cache 
       run: rm -rf .terraform 
-
-    - name: Set AWS Region
-      env:
-        AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }} # Your dynamic logic here
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
