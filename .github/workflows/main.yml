@@ -2,7 +2,9 @@ name: 'DevSecOps CI/CD Pipeline (Terraform Cloud)'
 
 on:
   push:
-    branches: [ "dev-snky" ]
+    branches:
+      - main
+      - dev-snyk
   pull_request:
 
 permissions:
