@@ -38,6 +38,14 @@ jobs:
         echo "AWS_REGION: $AWS_REGION"
         # Add other variables you use (AWS keys, etc.)
 
+    - name: Terraform Init
+      id: init
+      env:
+        AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+        AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
+        AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }}
+      run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
+
     - name: Run Snyk auth
       id: auth
       run: snyk auth ${{ secrets.SNYK_TOKEN }}
