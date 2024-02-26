@@ -10,14 +10,14 @@ permissions:
 
 jobs:
   terraform-validate-plan:
-  name: 'Terraform-Validate-Plan'
+    name: 'Terraform-Validate-Plan'
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
-
-    envs:
-      AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }}
-
-    defaults:
+    environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }} # Notice indentation!
+  
+    envs: 
+      AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }} # Indent this as well 
+  
+    defaults: 
       run:
         shell: bash
 
