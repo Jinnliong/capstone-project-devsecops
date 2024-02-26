@@ -35,6 +35,11 @@ jobs:
     - name: Install Snyk 
       run: npm install -g snyk
 
+    - name: Print Environment 
+      run: | 
+        echo "AWS_REGION: $AWS_REGION"
+        # Add other variables you use (AWS keys, etc.)
+
     - name: Terraform Init
       id: init
       env:
