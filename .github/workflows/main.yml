@@ -64,4 +64,4 @@ jobs:
       uses: snyk/actions/node@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
-      run: snyk test --severity-threshold=high 
+      run: snyk iac test --severity-threshold=high 
