@@ -87,8 +87,6 @@ jobs:
       - name: Install snyk
         run : npm install -g snyk
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
+        run: snyk iac test --severity-threshold=high 
         env:
           SNYK_TOKEN: '${{ secrets.SNYK_TOKEN }}'
-        with:
-          args: --severity-threshold=high 
