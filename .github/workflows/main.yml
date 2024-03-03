@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  terraform-validate-plan:
+  initialization:
     name: 'Terraform-Validate-Plan'
     runs-on: ubuntu-latest
     environment: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }} # Notice indentation!
@@ -24,41 +24,64 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout code
+    - name: Check out repository code
       uses: actions/checkout@v3
-    
     - name: Clear Terraform Cache 
       run: rm -rf .terraform 
 
-    - name: Install Snyk 
-      run: npm install -g snyk
+  install-dependencies:
+    name: install-dependencies
+    runs-on: ubuntu-latest
+      needs: initialization
+      steps:
+        - name: Check out repository code
+          uses: actions/checkout@v3
+        - name: Run Installation of Dependencies Commands
+          run: npm install  
+        - name: Install Snyk 
+          run: npm install -g snyk
 
-    - name: Print Environment 
-      run: | 
-        echo "AWS_REGION: $AWS_REGION"
-        # Add other variables you use (AWS keys, etc.)
-
-    - name: Terraform Init
-      id: init
-      env:
-        AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-        AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
-        AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }}
-      run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
+  npm-audit:
+    name: Scan and Fix Vulnerabilities with npm
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run npm audit fix
+        run: npm audit fix
+      - name: Run Scanning of Dependencies Commands
+        run: npm audit
+        
+  terraform-check:
+    name: Scan and Fix Vulnerabilities with npm
+    runs-on: ubuntu-latest
+    needs: npm-audit
+    steps:
+      - name: Terraform Init
+        id: init
+        env:
+          AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+          AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
+          AWS_REGION: ${{ github.ref == 'refs/heads/main' && 'ap-southeast-1' || 'ap-northeast-1' }}
+        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
       
-    - name: Terraform fmt
-      id: fmt
-      run: terraform fmt -check
-      continue-on-error: true
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
 
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate -no-color
-      continue-on-error: true
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        continue-on-error: true
       
-    - name: Run Snyk auth
-      id: auth
-      run: snyk auth ${{ secrets.SNYK_TOKEN }}
-
-    - name: Run Snyk dependency scan (pre-deployment)
-      run: snyk iac test --severity-threshold=high 
+  synk-test:
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      - name: Run Snyk auth
+        id: auth
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+      - name: Run Snyk dependency scan (pre-deployment)
+        run: snyk iac test --severity-threshold=high 
