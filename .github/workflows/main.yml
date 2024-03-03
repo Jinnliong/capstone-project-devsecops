@@ -78,7 +78,7 @@ jobs:
       
   synk-test:
     runs-on: ubuntu-latest
-    needs: install-dependencies
+    needs: initialization
     steps:
       - uses: actions/checkout@master
       - name: Install snyk
