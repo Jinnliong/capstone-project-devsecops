@@ -58,6 +58,6 @@ jobs:
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
-        uses: github/jinnliong/upload-sarif@v2
+        uses: github/jinnliong/scan
         with:
           sarif_file: snyk-code.sarif
