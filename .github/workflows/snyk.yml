@@ -1,12 +1,11 @@
 name: Snyk Comprehensive Security scan
 
 on:
-  workflow_call:
-    secrets:
-      SNYK_TOKEN:
-        description: 'A SNYK token passed from the caller workflow'
-        required: true
-
+  push:
+    branches:
+      - main
+      - dev-snky
+  pull_request:
 
 jobs:
   SAST-SCA-IaC_Container_scan:
