@@ -6,7 +6,7 @@ on:
 
 env:
     TF_CLOUD_ORGANIZATION: "jinnliong_org"
-    TF_WORKSPACE: "capstone-project-group1-dev"
+    TF_WORKSPACE: "capstone-project-group1-dev" # just to push
     CONFIG_DIRECTORY: "env/dev"
 
 permissions:
