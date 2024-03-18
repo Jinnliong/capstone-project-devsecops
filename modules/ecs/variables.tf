@@ -1,7 +1,7 @@
 
 variable "name_prefix" {
   type = string
-  default = "jinnliong"
+  #default = "jinnliong"
 }
 
 variable "service_type" {

@@ -4,7 +4,7 @@ variable "vpc_id" {
 
 variable "name_prefix" {
     type = string
-    default = "jinnliong"
+    #default = "jinnliong"
 }
 
 variable "all_subnets" {

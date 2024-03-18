@@ -1,6 +1,6 @@
 variable "name_prefix" {
     type = string
-    default = "jinnliong"
+    #default = "jinnliong"
 }
 
 variable "no_of_ec2" {
