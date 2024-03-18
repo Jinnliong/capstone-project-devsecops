@@ -5,8 +5,8 @@ on:
     branches: [main]
 
 env:
-    TF_CLOUD_ORGANIZATION: "weiyang-org"
-    TF_WORKSPACE: "capstone-project-group1-dev"
+    TF_CLOUD_ORGANIZATION: "jinnliong_org"
+    TF_WORKSPACE: "ec2-dev"
     CONFIG_DIRECTORY: "env/dev"
 
 permissions:
