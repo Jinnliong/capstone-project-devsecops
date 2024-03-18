@@ -5,7 +5,7 @@ variable "cidr_block" {
 
 variable "name_prefix" {
   type = string
-  default = ""
+  default = "jinnliong"
 }
 
 variable "public_subnet_count" {
