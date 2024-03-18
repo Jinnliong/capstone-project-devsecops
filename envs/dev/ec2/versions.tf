@@ -11,7 +11,7 @@ terraform {
     organization = "jinnliong_org" #Update to your organization name
 
     workspaces {
-      name = "ec2-dev"
+      name = "capstone-project-group1-dev"
     }
   }
 }
