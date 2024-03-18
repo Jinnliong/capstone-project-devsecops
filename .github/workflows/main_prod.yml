@@ -5,9 +5,9 @@ on:
     branches: [main]
 
 env:
-    TF_CLOUD_ORGANIZATION: "jinnliong_org"
-    TF_WORKSPACE: "capstone-project-group1-prod"
-    CONFIG_DIRECTORY: "env/prod"
+  TF_CLOUD_ORGANIZATION: "jinnliong_org"
+  TF_WORKSPACE: "capstone-project-group1-prod"
+  CONFIG_DIRECTORY: "env"
 
 permissions:
   contents: read
