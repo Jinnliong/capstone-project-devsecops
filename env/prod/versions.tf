@@ -7,7 +7,7 @@ terraform {
     }
   }
 cloud {
-  organization = "weiyang-org"
+  organization = "jinnliong_org"
 
   workspaces {
     name = "capstone-project-group1-prod"
