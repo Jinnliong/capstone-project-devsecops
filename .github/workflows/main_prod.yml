@@ -1,4 +1,4 @@
-name: 'Terrform Cloud Prod Run'
+name: 'Terraform Cloud Prod Run'
 
 on:
   push:
