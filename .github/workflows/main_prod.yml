@@ -6,7 +6,7 @@ on:
 
 env:
     TF_CLOUD_ORGANIZATION: "jinnliong_org"
-    TF_WORKSPACE: "ec2-prod"
+    TF_WORKSPACE: "capstone-project-group1-prod"
     CONFIG_DIRECTORY: "env/prod"
 
 permissions:
