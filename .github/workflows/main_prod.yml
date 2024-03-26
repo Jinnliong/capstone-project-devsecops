@@ -1,13 +1,13 @@
-name: 'Terraform Cloud Prod Run'
+name: 'Terrform Cloud Prod Run'
 
 on:
   push:
     branches: [main]
 
 env:
-  TF_CLOUD_ORGANIZATION: "jinnliong_org"
-  TF_WORKSPACE: "capstone-project-group1-prod"
-  CONFIG_DIRECTORY: "env"
+    TF_CLOUD_ORGANIZATION: "weiyang-org"
+    TF_WORKSPACE: "capstone-project-group1-prod"
+    CONFIG_DIRECTORY: "env/prod"
 
 permissions:
   contents: read

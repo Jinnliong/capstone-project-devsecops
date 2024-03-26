@@ -1,0 +1,58 @@
+capstone-project-devsecops
+├── .github/
+│    ├── workflows/
+│   │   ├── app_deploy.yml
+│   │   ├── main_dev.yml
+│   │   ├── main_prod.yml
+│   │   └── snykscan.yml
+├── env/
+│   ├── dev/
+│   │   ├── backend.tf
+│   │   ├── locals.tf
+│   │   ├── main.tf
+│   │   ├── provider.tf
+│   │   ├── variables.tf
+│   │   ├── version.tf
+│   ├── prod/
+│   │   ├── backend.tf
+│   │   ├── locals.tf
+│   │   ├── main.tf
+│   │   ├── provider.tf
+│   │   ├── variables.tf
+│   │   ├── version.tf
+├── modules/
+│   ├── alb/
+│   │   ├── main.tf
+│   │   ├── output.tf 
+│   │   └── variables.tf 
+│   ├── ec2/
+│   │   ├── data.tf
+│   │   ├── main.tf
+│   │   ├── output.tf 
+│   │   └── variables.tf 
+│   ├── ecs/
+│   │   ├── data.tf
+│   │   ├── locals.tf
+│   │   ├── main.tf
+│   │   ├── output.tf 
+│   │   └── variables.tf 
+│   ├── iam_policy/
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   └── routes53/
+│   │   ├── main.tf
+│   │   ├── output.tf 
+│   │   └── variables.tf
+│   ├── vpc/
+│   │   ├── data.tf
+│   │   ├── locals.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   ├── variables.tf
+├── backend.tf
+├── locals.tf
+├── main.tf
+├── output.tf
+├── provider.tf
+├── README.md
+├── variables.tf
